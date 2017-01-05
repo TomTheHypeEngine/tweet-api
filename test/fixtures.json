@@ -22,16 +22,13 @@
   ],
   "tweets": [
     {
-      "content": "Doh!!",
-      "tweeter": "->users.homer"
+      "content": "Doh!!"
     },
     {
-      "content": "Eat my pants!",
-      "tweeter": "->users.bart"
+      "content": "Eat my pants!"
     },
     {
-      "content": "Who is Bartman?!",
-      "tweeter": "->users.homer"
+      "content": "Who is Bartman?!"
     }
   ],
   "newUser": {
@@ -39,9 +36,5 @@
     "lastName": "Simpson",
     "email": "maggie@simpson.com",
     "password": "secret"
-  },
-  "newTweet": {
-    "content": "Hello World!",
-    "tweeter": "->users.bart"
   }
 }

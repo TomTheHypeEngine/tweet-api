@@ -37,8 +37,8 @@ class TweetService {
     return this.httpService.delete('/api/users');
   }
 
-  makeTweet(id, tweet) {
-    return this.httpService.post('/api/users/' + id + '/tweets', tweet);
+  makeTweet(tweet) {
+    return this.httpService.post('/api/tweets', tweet);
   }
 
   getTweets(id) {

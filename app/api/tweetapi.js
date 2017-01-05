@@ -9,7 +9,11 @@ exports.findTweets = {
     strategy: 'jwt',
   },
   handler: function (request, reply) {
-
+    Tweet.find({}).populate('tweeter').then(tweets => {
+      reply(tweets);
+    }).catch(err => {
+      reply(Boom.badImplementation('error accessing db'));
+    });
   },
 };
 
@@ -32,16 +36,15 @@ exports.makeTweet = {
     strategy: 'jwt',
   },
   handler: function (request, reply) {
-
-  },
-};
-
-exports.deleteUsersTweets = {
-  auth: {
-    strategy: 'jwt',
-  },
-  handler: function (request, reply) {
-
+    const tweet = new Tweet(request.payload);
+    tweet.tweeter = utils.getUserIdFromRequest(request);
+    tweet.save().then(newTweet => {
+      return Tweet.findOne(newTweet).populate('tweeter');
+    }).then(newTweet => {
+      reply(newTweet).code(201);
+    }).catch(err => {
+      reply(Boom.badImplementation('error making donation'));
+    });
   },
 };
 
@@ -50,7 +53,24 @@ exports.deleteOneTweet = {
     strategy: 'jwt',
   },
   handler: function (request, reply) {
+    Tweet.remove({ tweeter: request.params.id, _id: request.params.tid }).then(result => {
+      reply.code(204);
+    }).catch(err => {
+      reply(Boom.badImplementation('error removing Tweets'));
+    });
+  },
+};
 
+exports.deleteUsersTweets = {
+  auth: {
+    strategy: 'jwt',
+  },
+  handler: function (request, reply) {
+    Tweet.remove({ tweeter: request.params.id }).then(result => {
+      reply.code(204);
+    }).catch(err => {
+      reply(Boom.badImplementation('error removing Tweets'));
+    });
   },
 };
 
@@ -59,6 +79,10 @@ exports.deleteAllTweets = {
     strategy: 'jwt',
   },
   handler: function (request, reply) {
-
+    Tweet.remove({}).then(result => {
+      reply.code(204);
+    }).catch(err => {
+      reply(Boom.badImplementation('error removing Tweets'));
+    });
   },
 };

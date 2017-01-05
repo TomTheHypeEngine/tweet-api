@@ -13,7 +13,7 @@ class SyncHttpService {
       var payload = JSON.parse(res.getBody('utf8'));
       if (payload.success) {
         this.authHeadder = { Authorization: 'bearer ' + payload.token, };
-        return true;
+        return payload.user;
       }
     }
 
