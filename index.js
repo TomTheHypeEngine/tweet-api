@@ -4,7 +4,7 @@ const Hapi = require('hapi');
 const corsHeaders = require('hapi-cors-headers');
 
 var server = new Hapi.Server();
-server.connection({ port: process.env.PORT || 4000 });
+server.connection({ port: process.env.PORT || 5000 });
 
 const utils = require('./app/api/utils.js');
 require('./app/models/db');
@@ -46,6 +46,7 @@ server.register([require('inert'), require('vision'), require('hapi-auth-cookie'
   });
 
   server.ext('onPreResponse', corsHeaders);
+
   // server.route(require('./routes'));
   server.route(require('./routesapi'));
 

@@ -21,7 +21,7 @@
     }
   },
   "tweets": {
-    "_model": "Tweets",
+    "_model": "Tweet",
     "one": {
       "content": "Doh!!",
       "tweeter": "->users.homer"
