@@ -25,11 +25,11 @@
     "one": {
       "content": "Doh!!",
       "tweeter": "->users.homer"
-    }
+    },
     "two": {
       "content": "Eat my pants!",
       "tweeter": "->users.bart"
-    }
+    },
     "three": {
       "content": "Who is Bartman?!",
       "tweeter": "->users.homer"

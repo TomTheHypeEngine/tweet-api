@@ -58,4 +58,4 @@ class TweetService {
   }
 }
 
-module.exports = DonationService;
+module.exports = TweetService;
