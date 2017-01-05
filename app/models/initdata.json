@@ -1,0 +1,38 @@
+{
+  "users": {
+    "_model": "User",
+    "homer": {
+      "firstName": "Homer",
+      "lastName": "Simpson",
+      "email": "homer@simpson.com",
+      "password": "secret"
+    },
+    "marge": {
+      "firstName": "Marge",
+      "lastName": "Simpson",
+      "email": "marge@simpson.com",
+      "password": "secret"
+    },
+    "bart": {
+      "firstName": "Bart",
+      "lastName": "Simpson",
+      "email": "bart@simpson.com",
+      "password": "secret"
+    }
+  },
+  "tweets": {
+    "_model": "Tweets",
+    "one": {
+      "content": "Doh!!",
+      "tweeter": "->users.homer"
+    }
+    "two": {
+      "content": "Eat my pants!",
+      "tweeter": "->users.bart"
+    }
+    "three": {
+      "content": "Who is Bartman?!",
+      "tweeter": "->users.homer"
+    }
+  }
+}
