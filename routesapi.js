@@ -1,5 +1,6 @@
 const UsersApi = require('./app/api/usersapi');
 const TweetApi = require('./app/api/tweetapi');
+const Assets = require('./app/controllers/assets');
 
 module.exports = [
   { method: 'GET', path: '/api/users', config: UsersApi.find },
@@ -16,4 +17,11 @@ module.exports = [
   { method: 'DELETE', path: '/api/tweets', config: TweetApi.deleteAllTweets },
 
   { method: 'POST', path: '/api/users/authenticate', config: UsersApi.authenticate },
+
+  {
+    method: 'GET',
+    path: '/{param*}',
+    config: { auth: false },
+    handler: Assets.servePublicDirectory,
+  },
 ];
