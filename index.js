@@ -2,6 +2,7 @@
 
 const Hapi = require('hapi');
 const corsHeaders = require('hapi-cors-headers');
+const password = 'secretpasswordnotrevealedtoanyone';
 
 var server = new Hapi.Server();
 server.connection({ port: process.env.PORT || 5000 });
@@ -28,15 +29,15 @@ server.register([require('inert'), require('vision'), require('hapi-auth-cookie'
   // });
 
   server.auth.strategy('standard', 'cookie', {
-    password: 'secretpasswordnotrevealedtoanyone',
-    cookie: 'donation-cookie',
+    password: password,
+    cookie: 'tweet-cookie',
     isSecure: false,
     ttl: 24 * 60 * 60 * 1000,
     redirectTo: '/login',
   });
 
   server.auth.strategy('jwt', 'jwt', {
-    key: 'secretpasswordnotrevealedtoanyone',
+    key: password,
     validateFunc: utils.validate,
     verifyOptions: { algorithms: ['HS256'] },
   });
