@@ -98,7 +98,7 @@ exports.authenticate = {
         const token = utils.createToken(foundUser);
         reply({ success: true, token: token, user: foundUser }).code(201);
       } else {
-        reply({ success: false, message: 'Authentication failed. User not found.' }).code(201);
+        reply({ success: false, message: 'Authentication failed. User not found.' }).code(400);
       }
     }).catch(err => {
       reply(Boom.notFound('internal db failure'));
