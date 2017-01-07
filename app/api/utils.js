@@ -34,12 +34,12 @@ exports.validate = function (decoded, request, callback) {
 };
 
 exports.getUserIdFromRequest = function (request) {
-  var userId = null;
+  let userId = null;
   try {
     const authorization = request.headers.authorization;
-    var token = authorization.split(' ')[1];
-    var decodedToken = jwt.verify(token, secret);
-    userId = decodedToken.id;
+    let token = authorization.split(' ')[1];
+    let decoded = this.decodeToken(token);
+    userId = decoded.userId;
   } catch (e) {
     userId = null;
   }
