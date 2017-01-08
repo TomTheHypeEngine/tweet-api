@@ -73,6 +73,23 @@ suite('User API tests', function () {
     }
   });
 
+  test('update user', function () {
+    const u1 = tweetService.createUser(newUser);
+    assert(tweetService.getUser(u1._id) != null);
+    const updateUser = {
+      firstName: 'Changed',
+      lastName: 'LastName',
+      email: 'newMail',
+      password: '123456',
+    };
+    const updated = { ok: 1, nModified: 1, n: 1 };
+
+    const updatedResp = tweetService.updateOneUser(updateUser, u1._id);
+    assert(updatedResp, updated);
+    const u3 = tweetService.getUser(u1._id);
+    assert(_.some([u3], updateUser), 'Updated user must have same fields like updateUser');
+  });
+
   // test('get all users empty', function () {
   //   const allUsers = donationService.getUsers();
   //   assert.equal(allUsers.length, 0);

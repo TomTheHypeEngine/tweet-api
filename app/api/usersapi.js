@@ -55,6 +55,23 @@ exports.create = {
 
 };
 
+exports.updateUser = {
+
+  auth: {
+    strategy: 'jwt',
+  },
+
+  handler: function (request, reply) {
+    const user = request.payload;
+    User.updateOne({ _id: request.params.id }, user, { upsert: true, setDefaultsOnInsert: true })
+        .then(updatedUser => {
+      reply(updatedUser).code(200);
+    }).catch(err => {
+      reply(Boom.badImplementation('error updating user'));
+    });
+  },
+};
+
 exports.deleteAll = {
 
   auth: {
