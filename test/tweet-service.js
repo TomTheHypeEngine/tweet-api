@@ -25,6 +25,10 @@ class TweetService {
     return this.httpService.get('/api/users/' + id);
   }
 
+  getUserData(id) {
+    return this.httpService.get('/api/users/' + id + '/tweets');
+  }
+
   createUser(newUser) {
     return this.httpService.post('/api/users', newUser);
   }

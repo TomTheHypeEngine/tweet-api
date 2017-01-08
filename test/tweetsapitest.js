@@ -67,4 +67,15 @@ suite('Tweet API tests', function () {
     const d = tweetService.getTweets(loggedInUser._id);
     assert.equal(d.length, 0);
   });
+
+  test('get users tweets', function () {
+    tweetService.makeTweet(tweets[0]);
+    tweetService.logout();
+    tweetService.login(users[1]);
+    tweetService.makeTweet(tweets[1]);
+
+    const userData = tweetService.getUserData(loggedInUser._id);
+    console.log(userData);
+    assert(userData.length === 1);
+  });
 });
