@@ -9,7 +9,7 @@ exports.findTweets = {
     strategy: 'jwt',
   },
   handler: function (request, reply) {
-    Tweet.find({}).populate('tweeter').then(tweets => {
+    Tweet.find({ tweeter: request.params.id }).populate('tweeter').then(tweets => {
       reply(tweets);
     }).catch(err => {
       reply(Boom.badImplementation('error accessing db'));
