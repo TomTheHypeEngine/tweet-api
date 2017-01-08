@@ -63,7 +63,7 @@ exports.updateUser = {
 
   handler: function (request, reply) {
     const user = request.payload;
-    User.updateOne({ _id: request.params.id }, user, { upsert: true, setDefaultsOnInsert: true })
+    User.update({ _id: request.params.id }, user, { upsert: true, setDefaultsOnInsert: true })
         .then(updatedUser => {
       reply(updatedUser).code(200);
     }).catch(err => {
