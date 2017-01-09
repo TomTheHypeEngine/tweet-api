@@ -37,7 +37,10 @@ exports.makeTweet = {
   },
   handler: function (request, reply) {
     const tweet = new Tweet(request.payload);
-    tweet.tweeter = utils.getUserIdFromRequest(request);
+    if (tweet.tweeter == null) {
+      tweet.tweeter = utils.getUserIdFromRequest(request);
+    }
+
     tweet.save().then(newTweet => {
       return Tweet.findOne(newTweet).populate('tweeter');
     }).then(newTweet => {
