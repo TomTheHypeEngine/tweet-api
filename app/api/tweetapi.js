@@ -56,10 +56,10 @@ exports.deleteOneTweet = {
     strategy: 'jwt',
   },
   handler: function (request, reply) {
-    Tweet.remove({ tweeter: request.params.id, _id: request.params.tid }).then(result => {
-      reply.code(204);
+    Tweet.remove({ _id: request.params.id }).then(result => {
+      reply().code(204);
     }).catch(err => {
-      reply(Boom.badImplementation('error removing Tweets'));
+      reply(Boom.badImplementation('error removing tweet'));
     });
   },
 };
@@ -70,7 +70,7 @@ exports.deleteUsersTweets = {
   },
   handler: function (request, reply) {
     Tweet.remove({ tweeter: request.params.id }).then(result => {
-      reply.code(204);
+      reply().code(204);
     }).catch(err => {
       reply(Boom.badImplementation('error removing Tweets'));
     });
@@ -83,7 +83,7 @@ exports.deleteAllTweets = {
   },
   handler: function (request, reply) {
     Tweet.remove({}).then(result => {
-      reply.code(204);
+      reply().code(204);
     }).catch(err => {
       reply(Boom.badImplementation('error removing Tweets'));
     });
