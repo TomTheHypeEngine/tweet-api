@@ -24,14 +24,17 @@
     "_model": "Tweet",
     "one": {
       "content": "Doh!!",
+      "tweetDate": null,
       "tweeter": "->users.homer"
     },
     "two": {
       "content": "Eat my pants!",
+      "tweetDate": null,
       "tweeter": "->users.bart"
     },
     "three": {
       "content": "Who is Bartman?!",
+      "tweetDate": null,
       "tweeter": "->users.homer"
     }
   }

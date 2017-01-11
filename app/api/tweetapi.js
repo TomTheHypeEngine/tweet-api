@@ -41,6 +41,8 @@ exports.makeTweet = {
       tweet.tweeter = utils.getUserIdFromRequest(request);
     }
 
+    tweet.tweetDate = new Date();
+
     tweet.save().then(newTweet => {
       return Tweet.findOne(newTweet).populate('tweeter');
     }).then(newTweet => {
