@@ -18,6 +18,13 @@
       "lastName": "Simpson",
       "email": "bart@simpson.com",
       "password": "secret"
+    },
+    "admin": {
+      "firstName": "Critter",
+      "lastName": "Admin",
+      "admin": true,
+      "email": "admin@critter.com",
+      "password": "admin"
     }
   },
   "tweets": {
@@ -37,11 +44,15 @@
       "tweetDate": "2017-01-11T12:00:00Z",
       "tweeter": "->users.homer"
     },
-
     "four": {
       "content": "Making #Donuts for my dear husband. I'm so proud of his job @ the Nuclear Factory",
       "tweetDate": "2017-01-11T13:00:00Z",
       "tweeter": "->users.marge"
+    },
+    "five": {
+      "content": "Welcome everyone to Critter, have fun and be polite.",
+      "tweetDate": "2017-01-11T14:00:00Z",
+      "tweeter": "->users.admin"
     }
   }
 }
