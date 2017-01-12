@@ -63,11 +63,18 @@ exports.updateUser = {
 
   handler: function (request, reply) {
     const user = request.payload;
-    User.update({ _id: request.params.id }, user, { upsert: true, setDefaultsOnInsert: true })
-        .then(updatedUser => {
-      reply(updatedUser).code(200);
-    }).catch(err => {
-      reply(Boom.badImplementation('error updating user'));
+    console.log(user);
+    User.findOne({ _id: request.params.id}).then(existingUser => {
+      if (user.oldPassword !== existingUser.password) {
+        reply(Boom.badRequest('wrong old password'));
+      } else {
+        User.update({ _id: request.params.id }, user, { upsert: true, setDefaultsOnInsert: true })
+            .then(updatedUser => {
+              reply(updatedUser).code(200);
+            }).catch(err => {
+          reply(Boom.badImplementation('error updating user'));
+        });
+      }
     });
   },
 };

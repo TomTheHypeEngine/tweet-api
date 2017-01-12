@@ -9,7 +9,7 @@ exports.findTweets = {
     strategy: 'jwt',
   },
   handler: function (request, reply) {
-    Tweet.find({ tweeter: request.params.id }).populate('tweeter').then(tweets => {
+    Tweet.find({ tweeter: request.params.id }).populate('tweeter', '-password').then(tweets => {
       reply(tweets);
     }).catch(err => {
       reply(Boom.badImplementation('error accessing db'));
@@ -23,7 +23,7 @@ exports.findAllTweets = {
   },
 
   handler: function (request, reply) {
-    Tweet.find({}).populate('tweeter').then(tweets => {
+    Tweet.find({}).populate('tweeter', '-password').then(tweets => {
       reply(tweets);
     }).catch(err => {
       reply(Boom.badImplementation('error accessing db'));
@@ -44,7 +44,7 @@ exports.makeTweet = {
     tweet.tweetDate = new Date();
 
     tweet.save().then(newTweet => {
-      return Tweet.findOne(newTweet).populate('tweeter');
+      return Tweet.findOne(newTweet).populate('tweeter', '-password');
     }).then(newTweet => {
       reply(newTweet).code(201);
     }).catch(err => {

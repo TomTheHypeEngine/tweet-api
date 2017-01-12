@@ -80,6 +80,7 @@ suite('User API tests', function () {
       firstName: 'Changed',
       lastName: 'LastName',
       email: 'newMail',
+      oldPassword: 'secret',
       password: '123456',
     };
     const updated = { ok: 1, nModified: 1, n: 1 };
@@ -87,7 +88,11 @@ suite('User API tests', function () {
     const updatedResp = tweetService.updateOneUser(updateUser, u1._id);
     assert(updatedResp, updated);
     const u3 = tweetService.getUser(u1._id);
-    assert(_.some([u3], updateUser), 'Updated user must have same fields like updateUser');
+
+    assert(updateUser.firstName === u3.firstName);
+    assert(updateUser.password === u3.password);
+    assert(updateUser.email === u3.email);
+    assert(updateUser.lastName === u3.lastName);
   });
 
   // test('get all users empty', function () {
