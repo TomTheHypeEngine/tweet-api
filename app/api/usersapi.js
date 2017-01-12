@@ -63,8 +63,8 @@ exports.updateUser = {
 
   handler: function (request, reply) {
     const user = request.payload;
-    console.log(user);
-    User.findOne({ _id: request.params.id}).then(existingUser => {
+    // console.log(user);
+    User.findOne({ _id: request.params.id }).then(existingUser => {
       if (user.oldPassword !== existingUser.password) {
         reply(Boom.badRequest('wrong old password'));
       } else {
@@ -75,6 +75,22 @@ exports.updateUser = {
           reply(Boom.badImplementation('error updating user'));
         });
       }
+    });
+  },
+};
+
+exports.resetUserPassword = {
+
+  auth: {
+    strategy: 'jwt',
+  },
+
+  handler: function (request, reply) {
+    const newPassword = request.payload;
+    User.update({ _id: request.params.id}, { password: newPassword}).then(updatedUser => {
+      reply(updatedUser).code(200);
+    }).catch(err => {
+      reply(Boom.badImplementation('error updating user'));
     });
   },
 };
