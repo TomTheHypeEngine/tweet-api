@@ -9,7 +9,8 @@ exports.findTweets = {
     strategy: 'jwt',
   },
   handler: function (request, reply) {
-    Tweet.find({ tweeter: request.params.id }).populate('tweeter', '-password').then(tweets => {
+    Tweet.find({ tweeter: request.params.id }).populate('tweeter', '-password')
+        .sort('-tweetDate').then(tweets => {
       reply(tweets);
     }).catch(err => {
       reply(Boom.badImplementation('error accessing db'));
@@ -23,7 +24,8 @@ exports.findAllTweets = {
   },
 
   handler: function (request, reply) {
-    Tweet.find({}).populate('tweeter', '-password').then(tweets => {
+    Tweet.find({}).populate('tweeter', '-password')
+        .sort('-tweetDate').then(tweets => {
       reply(tweets);
     }).catch(err => {
       reply(Boom.badImplementation('error accessing db'));
