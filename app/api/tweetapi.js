@@ -1,6 +1,7 @@
 'use strict';
 
 const Tweet = require('../models/tweet');
+const User = require('../models/user');
 const Boom = require('boom');
 const utils = require('./utils');
 
@@ -29,6 +30,29 @@ exports.findAllTweets = {
       reply(tweets);
     }).catch(err => {
       reply(Boom.badImplementation('error accessing db'));
+    });
+  },
+};
+
+exports.findFollowedTweets = {
+  auth: {
+    strategy: 'jwt',
+  },
+
+  handler: function (request, reply) {
+    let followedUsers = [];
+    User.findOne({ _id: request.params.id }).then(user => {
+      if (user == null) {
+        reply(Boom.notFound('User id ' + request.payload.id + ' not found'));
+      }
+
+      Tweet.find({ _id: { $in: followedUsers } }).populate('tweeter', '-password')
+          .then(followedTweets => {
+            reply(followedTweets).code(200);
+          });
+      followedUsers = user.followedUsers;
+    }).catch(err => {
+      Boom.badImplementation('error getting followed tweets');
     });
   },
 };

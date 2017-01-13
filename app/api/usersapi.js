@@ -27,7 +27,7 @@ exports.findOne = {
   },
 
   handler: function (request, reply) {
-    User.findOne({ _id: request.params.id }).then(user => {
+    User.findOne({ _id: request.params.id }, '-password').then(user => {
       if (user != null) {
         reply(user);
       }
@@ -38,6 +38,71 @@ exports.findOne = {
     });
   },
 
+};
+
+exports.findOneWithFollowed = {
+
+  auth: {
+    strategy: 'jwt',
+  },
+
+  handler: function (request, reply) {
+    User.findOne({ _id: request.params.id }, '-password').populate('followedUsers', '-password -followedUsers -admin').then(user => {
+      if (user != null) {
+        reply(user);
+      }
+
+      reply(Boom.notFound('id not found'));
+    }).catch(err => {
+      reply(Boom.notFound('id not found'));
+    });
+  },
+};
+
+exports.followUser = {
+  /**Requesting User Follows the user in the url**/
+  auth: {
+    strategy: 'jwt',
+  },
+
+  handler: function (request, reply) {
+    User.findOne({ _id: request.payload }).then(user => {
+      if (user == null) {
+        reply(Boom.notFound('user not found'));
+      }
+
+      user.followedUsers.push(request.params.id);
+      User.update({ _id: request.payload }, user)
+          .then(res => {
+            reply(res).code(200);
+          });
+    }).catch(err => {
+      reply(Boom.badImplementation('error unfollowing user'));
+    });
+  },
+};
+
+exports.unfollowUser = {
+  /**Requesting User Unfollows the user in the url**/
+  auth: {
+    strategy: 'jwt',
+  },
+
+  handler: function (request, reply) {
+    User.findOne({ _id: request.payload }).then(user => {
+        if (user == null) {
+          reply(Boom.notFound('user not found'));
+        }
+
+        user.followedUsers.pull(request.params.id);
+        User.update({ _id: request.payload }, user)
+            .then(res => {
+              reply(res).code(200);
+            });
+      }).catch(err => {
+      reply(Boom.badImplementation('error unfollowing user'));
+    });
+  },
 };
 
 exports.create = {
@@ -87,7 +152,7 @@ exports.resetUserPassword = {
 
   handler: function (request, reply) {
     const newPassword = request.payload;
-    User.update({ _id: request.params.id}, { password: newPassword}).then(updatedUser => {
+    User.update({ _id: request.params.id }, { password: newPassword }).then(updatedUser => {
       reply(updatedUser).code(200);
     }).catch(err => {
       reply(Boom.badImplementation('error updating user'));

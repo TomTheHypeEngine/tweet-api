@@ -5,18 +5,14 @@
       "firstName": "Homer",
       "lastName": "Simpson",
       "email": "homer@simpson.com",
-      "password": "secret"
-    },
-    "marge": {
-      "firstName": "Marge",
-      "lastName": "Simpson",
-      "email": "marge@simpson.com",
+      "followedUsers": [],
       "password": "secret"
     },
     "bart": {
       "firstName": "Bart",
       "lastName": "Simpson",
       "email": "bart@simpson.com",
+      "followedUsers": ["->users.homer"],
       "password": "secret"
     },
     "admin": {
@@ -24,7 +20,15 @@
       "lastName": "Admin",
       "admin": true,
       "email": "admin@critter.com",
+      "followedUsers": ["->users.bart", "->users.homer"],
       "password": "admin"
+    },
+    "marge": {
+      "firstName": "Marge",
+      "lastName": "Simpson",
+      "email": "marge@simpson.com",
+      "followedUsers": ["->users.homer", "->users.bart", "->users.admin"],
+      "password": "secret"
     }
   },
   "tweets": {
