@@ -6,12 +6,12 @@ This project uses the [NodeJS](www.nodejs.org) Java Script Runtime.
 
 Development was done with [JetBrains Webstorm](https://www.jetbrains.com/webstorm/)
 
-## Requrements
+## Requirements and Setup
 NodeJs and npm must be installed on your PC.
 
 Clone this repository and 
 
-```npm install```
+`npm install`
 
 from the project root directory.
 
