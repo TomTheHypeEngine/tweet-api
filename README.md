@@ -30,7 +30,7 @@ This api was created alongside my critter-client website which uses this api fou
 [here](https://github.com/TomTheHypeEngine/critter-client).
 
 ## Developer
-Thomas Hettrich aka [TomTheHypeEngine](https://github.com/TomTheHypeEngine)
+Thomas Hettrich aka [TomTheHypeEngine](https://github.com/TomTheHypeEngine) Student ID: 2830555
 
 ## Acknowledgment
 This project was created as an assignment for the course Building Modern Web Applications 
