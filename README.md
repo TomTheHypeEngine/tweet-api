@@ -2,7 +2,7 @@
 API Part for the DMAS Assignment - in use [here](https://tomthehypeengine.github.io/critter-client/)
 
 ## Development tools
-This project uses the [NodeJS](www.nodejs.org) Java Script Runtime.
+This project uses the [NodeJS](https://www.nodejs.org) Java Script Runtime.
 
 Development was done with [JetBrains Webstorm](https://www.jetbrains.com/webstorm/)
 
